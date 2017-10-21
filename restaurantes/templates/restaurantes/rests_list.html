@@ -1,13 +1,49 @@
-<div>
-	<h1>
-		Restaurants List
-	</h1>
-</div>
+{% load staticfiles %}
 
-{% for restaurant in restaurants %}
-	<div>
-	<h1> Restaurant name: {{ restaurant }} </h1>
-	<h2> Restaurant owner: {{ restaurant.owner|linebreaksbr}} </h2>
-	<h3> Restaurant foundation: {{ restaurant.fund_date}} </h3>
-	</div>
-{% endfor %}
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<style>
+			#rod{
+			position:absolute;
+			bottom:0;
+			width:100%;
+		}
+		</style>
+	</head>
+
+	<body>
+		<div class="header center">
+			<h1>
+				Restaurants List
+			</h1>
+		</div>
+
+		{% for restaurant in restaurants %}
+			<div class="card black">
+				<div class="card-content white-text">
+				<span class="card-title"> Restaurant name: {{ restaurant }} </span>
+				<p><i class="material-icons">face</i> Owner: {{ restaurant.owner|linebreaksbr}} </p>
+				<p> <i class="material-icons">event</i> Foundation date: {{ restaurant.fund_date}} </p>
+				</div>
+			</div>
+		{% endfor %}
+
+		<div id="rod">
+			<footer class="page-footer green">
+				<div class="footer-copyright">
+					<div class="container">
+						Made by
+						<a class="green-text text-lighten-3" href="http://github.com/SilvaEmerson"> Émerson J. Silva</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<link rel="text/javascript" href="{% static 'js/materialize.min.js' %}">
+
+	</body>
+</html>
