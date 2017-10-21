@@ -17,16 +17,18 @@
 	<body>
 		<div class="header center">
 			<h1>
-				Restaurants List
+				Lista de Restaurantes
 			</h1>
 		</div>
 
 		{% for restaurant in restaurants %}
 			<div class="card black">
 				<div class="card-content white-text">
-				<span class="card-title"> Restaurant name: {{ restaurant }} </span>
-				<p><i class="material-icons">face</i> Owner: {{ restaurant.owner|linebreaksbr}} </p>
-				<p> <i class="material-icons">event</i> Foundation date: {{ restaurant.fund_date}} </p>
+				<span class="card-title"><i class="material-icons">restaurant</i> Nome: {{ restaurant }} </span>
+				<p><i class="material-icons">face</i> Dono: {{ restaurant.owner|linebreaksbr}} </p>
+				<p><i class="material-icons">restaurant_menu</i> Especialidade: {{restaurant.speciality }} </p>
+				<p><i class="material-icons">location_on</i> Localização: {{restaurant.adress}} </p>
+				<p> <i class="material-icons">event</i> Criação: {{ restaurant.fund_date}} </p>
 				</div>
 			</div>
 		{% endfor %}
