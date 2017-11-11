@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<form class="col s3" method="post">
+  {% csrf_token %}
+  <div  class="input-field col s3">
+    <input id="name" type="text" name="name">
+    <label for="name">Name: </label>
+  </div>
+
+  <div class="input-field col s3">
+    <input id="owner" type="text" name="owner">
+    <label for="owner">Owner: </label>
+  </div>
+
+  <div class="input-field col s3">
+    <input id="adress" type="text" name="adress">
+    <label for="adress">Adress: </label>
+  </div>
+
+  <div class="input-field col s3">
+    <input id="speciality" type="text" name="speciality">
+    <label for="speciality">Speciality: </label>
+  </div>
+
+  <div class="input-field col s3">
+    <input id="fund_date" type="text" name="fund_date">
+    <label for="fund_date"> Date Fundation: </label>
+  </div>
+
+  <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+</form>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="{% static 'js/materialize.min.js' %}"></script>
