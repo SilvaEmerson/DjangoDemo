@@ -6,10 +6,6 @@
 		<link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<style>
-/*			 html, body
-    {
-        height: 100%;
-    }*/
     #footer{
     	position: relative;
         clear: both;
@@ -23,6 +19,10 @@
 				Lista de Restaurantes
 			</h1>
 		</div>
+		</div>
+		<a href="{% url 'restaurant_new' %}" class="btn-floating btn-large waves-effect waves-light green">
+			<i class="material-icons">add</i>
+		</a>
 
 		{% for restaurant in restaurants %}
 			<div class="card black">
@@ -48,7 +48,7 @@
 		</footer>
 
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<link rel="text/javascript" href="{% static 'js/materialize.min.js' %}">
+		<script src="{% static 'js/materialize.min.js' %}"></script>
 
 	</body>
 </html>
