@@ -1,54 +1,77 @@
 {% load staticfiles %}
 
 <html>
-	<head>
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<style>
-    #footer{
-    	position: relative;
-        clear: both;
-    }
-	</style>
-	</head>
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+        body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        }
 
-	<body>
-		<div class="header center">
-			<h1>
-				Lista de Restaurantes
-			</h1>
-		</div>
-		</div>
-		<a href="{% url 'restaurant_new' %}" class="btn-floating btn-large waves-effect waves-light green">
-			<i class="material-icons">add</i>
-		</a>
+        main {
+        flex: 1 0 auto;
+        }
+        </style>
+    </head>
 
-		{% for restaurant in restaurants %}
-			<div class="card black">
-				<div class="card-content white-text">
-				<span class="card-title"><i class="material-icons">restaurant</i> Nome: {{ restaurant }} </span>
-				<p><i class="material-icons">face</i> Dono: {{ restaurant.owner|linebreaksbr}} </p>
-				<p><i class="material-icons">restaurant_menu</i> Especialidade: {{restaurant.speciality }} </p>
-				<p><i class="material-icons">location_on</i> Localização: {{restaurant.adress}} </p>
-				<p> <i class="material-icons">event</i> Criação: {{ restaurant.fund_date}} </p>
-				</div>
-			</div>
-		{% endfor %}
+    <body>
+        <header>
+            <div class="header center">
+                <h1>
+                    Lista de Restaurantes
+                </h1>
+            </div>
+        </header>
 
-		<footer id="footer">
-			<footer class="page-footer green">
-				<div class="footer-copyright">
-					<div class="container">
-						Made by
-						<a class="green-text text-lighten-3" href="http://github.com/SilvaEmerson"> Émerson J. Silva</a>
-					</div>
-				</div>
-			</footer>
-		</footer>
+        <main>
+            {% if user.is_authenticated %}
+                <a href="{% url 'restaurant_new' %}" class="btn-large waves-effect waves-light green">
+                    Adicionar restaurante
+                    <i class="material-icons right">add</i>
+                </a>
+            {% endif %}
 
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="{% static 'js/materialize.min.js' %}"></script>
+            <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
 
-	</body>
+            {% for restaurant in restaurants %}
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">restaurant</i> {{ restaurant }} </div>
+                    <div class="collapsible-body black white-text">
+                        <p><i class="material-icons">face</i> Dono: {{ restaurant.owner|linebreaksbr}} </p>
+                        <p><i class="material-icons">restaurant_menu</i> Especialidade: {{restaurant.speciality }} </p>
+                        <p><i class="material-icons">location_on</i> Localização: {{restaurant.adress}} </p>
+                        <p> <i class="material-icons">event</i> Criação: {{ restaurant.fund_date}} </p>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'restaurant_edit' pk=restaurant.pk %}" class="waves-effect waves-light btn-large blue">
+                            Editar
+                            <i class="large material-icons right">mode_edit</i>
+                        </a>
+                        <a href="{% url 'restaurant_delete' pk=restaurant.pk %}" class="waves-effect waves-light btn-large red">
+                            Excluir
+                            <i class="large material-icons right">delete</i>
+                        </a>
+                    {% endif%}
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        </main>
+
+        <footer class="page-footer green">
+            <div class="footer-copyright">
+                <div class="container">
+                    Made by
+                    <a class="green-text text-lighten-3" href="http://github.com/SilvaEmerson"> Émerson J. Silva</a>
+                </div>
+            </div>
+        </footer>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="{% static 'js/materialize.min.js' %}"></script>
+
+    </body>
 </html>
