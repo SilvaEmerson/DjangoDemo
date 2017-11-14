@@ -38,7 +38,7 @@
 
   <div class="row">
     <div class="input-field col s5">
-      <i class="material-icons prefix">location_on</i>
+      <i class="material-icons prefix">edit_location</i>
       <input  placeholder="{{ restaurant.adress }}" id="adress" type="text" name="adress" value="{{ restaurant.adress }}">
       <label for="adress">Adress: </label>
     </div>
@@ -55,14 +55,14 @@
   <div class="row">
     <div class="input-field col s5">
       <i class="material-icons prefix">event</i>
-      <input placeholder="{{ restaurant.fund_date}}" id="fund_date" type="text" name="fund_date" value="{{ restaurant.fund_date }}">
+      <input id="fund_date" type="text" name="fund_date" value="{{ restaurant.fund_date.day}}/{{restaurant.fund_date.month}}/{{restaurant.fund_date.year}}">
       <label for="fund_date"> Date Fundation: </label>
     </div>
   </div>
 
   <button class="btn waves-effect waves-light blue" type="submit" name="action">
     Edit
-    <i class="material-icons right">send</i>
+    <i class="material-icons right">check</i>
   </button>
 
 </form>

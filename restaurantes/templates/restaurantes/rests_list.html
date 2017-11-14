@@ -22,7 +22,7 @@
         <header>
             <div class="header center">
                 <h1>
-                    Lista de Restaurantes
+                    Restaurantes
                 </h1>
             </div>
         </header>
@@ -39,7 +39,14 @@
 
             {% for restaurant in restaurants %}
                 <li>
-                    <div class="collapsible-header"><i class="material-icons">restaurant</i> {{ restaurant }} </div>
+                    <div class="collapsible-header">
+                        <i class="material-icons">restaurant</i> {{ restaurant }}
+
+                        {% for i in satisfations.keys %}
+                            <i class="material-icons right">{{ i }}</i>
+                        {% endfor %}
+
+                    </div>
                     <div class="collapsible-body black white-text">
                         <p><i class="material-icons">face</i> Dono: {{ restaurant.owner|linebreaksbr}} </p>
                         <p><i class="material-icons">restaurant_menu</i> Especialidade: {{restaurant.speciality }} </p>
@@ -72,6 +79,18 @@
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="{% static 'js/materialize.min.js' %}"></script>
+        <!-- <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/star-rating-svg.css' %}">
+        <script type="text/javascript">
+        $(".my-rating").starRating({
+            starSize: 25,
+            callback: function(currentRating, $el){
+                // make a server call here
+                var vote = currentRating;
+                console.log(vote)
+            }
+        });
+        </script> -->
 
     </body>
 </html>
