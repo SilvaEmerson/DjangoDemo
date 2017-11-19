@@ -1,27 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
-from .models import Restaurant
-from .forms import RestaurantNew
+from .models import Restaurant, Comments
+from .forms import RestaurantNew, RestaurantFeed
 # Create your views here.
-
-satisfations = {'sentiment_very_dissatisfied': 'vote0',
-                'sentiment_dissatisfied': 'vote1',
-                'sentiment_neutral': 'vote2', 'sentiment_satisfied': 'vote3',
-                'sentiment_very_satisfied': 'vote4'}
 
 
 def rests_list(request):
-    global satisfations
-    satisfations_icons = list(satisfations.keys())
-    urls = list(satisfations.values())
-    urls.sort()
-    numbers = [i for i in range(5)]
     restaurants = Restaurant.objects.order_by('name')
     return render(request, 'restaurantes/rests_list.html',
-                  {'restaurants': restaurants,
-                   'satisfations': satisfations,
-                   'urls': urls,
-                   'numbers': numbers})
+                  {'restaurants': restaurants})
 
 
 def restaurant_new(request):
@@ -58,6 +45,25 @@ def restaurant_delete(request, pk):
     restaurant = Restaurant.objects.get(pk=pk)
     restaurant.delete()
     return redirect('rests_list')
+
+
+def do_feedback(request, pk):
+    restaurant = get_object_or_404(Restaurant, pk=pk)
+    if request.method == "POST":
+        print('post')
+        feedback = RestaurantFeed(request.POST)
+        if feedback.is_valid():
+            feed = feedback.cleaned_data['feed']
+            newComment = Comments(comment=feed)
+            newComment.save()
+            restaurant.comments = newComment
+            restaurant.save()
+            return redirect('rests_list')
+    else:
+        print('get')
+        rest_feedbacks = Comments.objects.filter(id=pk)
+    return render(request, 'restaurantes/feedback.html',
+                  {'rest_feedbacks': rest_feedbacks})
 
 
 def vote0(request, pk):
