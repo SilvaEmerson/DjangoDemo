@@ -35,17 +35,24 @@
                 </a>
             {% endif %}
 
+            <div class="row">
+               <div class="col s6">
+                 <div class="row">
+                   <div class="input-field col s6">
+                     <i class="material-icons prefix">search</i>
+                     <input type="text" id="autocomplete-input" class="autocomplete">
+                     <label for="autocomplete-input">Pesquisar</label>
+                   </div>
+                 </div>
+               </div>
+            </div>
+
             <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
 
             {% for restaurant in restaurants %}
                 <li>
                     <div class="collapsible-header">
                         <i class="material-icons">restaurant</i> {{ restaurant }}
-
-                        {% for i in satisfations.keys %}
-                            <i class="material-icons right">{{ i }}</i>
-                        {% endfor %}
-
                     </div>
                     <div class="collapsible-body black white-text">
                         <p><i class="material-icons">face</i> Dono: {{ restaurant.owner|linebreaksbr}} </p>
@@ -62,6 +69,12 @@
                             <i class="large material-icons right">delete</i>
                         </a>
                     {% endif%}
+                    {% if not user.is_authenticated %}
+                        <a href="{% url 'add_feedback' pk=restaurant.pk %}"  class="btn-large waves-effect waves-light white black-text">
+                            Adicionar comentário
+                            <i class="material-icons right">add</i>
+                        </a>
+                    {% endif %}
                     </div>
                 </li>
             {% endfor %}
@@ -72,7 +85,8 @@
             <div class="footer-copyright">
                 <div class="container">
                     Made by
-                    <a class="green-text text-lighten-3" href="http://github.com/SilvaEmerson"> Émerson J. Silva</a>
+                    <a class="green-text text-lighten-3" href="http://github.com/SilvaEmerson">Émerson J. Silva</a> &
+                    <a class="green-text text-lighten-3" href="">Gerson Vieira</a>
                 </div>
             </div>
         </footer>
@@ -91,6 +105,18 @@
             }
         });
         </script> -->
-
+        <script type="text/javascript">
+        $(document).ready(function(){
+          $('input.autocomplete').autocomplete({
+              data: {
+                {% for restaurant in restaurants %}
+                    "{{restaurant.name}}":null,
+                {% endfor %}
+              },
+              limit: Infinity,
+              minLength: 1
+          });
+        });
+        </script>
     </body>
 </html>
