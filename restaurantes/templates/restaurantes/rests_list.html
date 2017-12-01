@@ -20,11 +20,14 @@
 
     <body>
         <header>
-            <div class="header center">
-                <h1>
-                    Restaurantes
-                </h1>
-            </div>
+      <nav class="top-nav white">
+       <div class="container center">
+         <div class="nav-wrapper">
+             <h1 class="center-on-small-only black-text">Restaurantes</h1>
+         </div>
+       </div>
+     </nav>
+     <br><br>
         </header>
 
         <main>
@@ -35,7 +38,7 @@
                 </a>
             {% endif %}
 
-            <div class="row">
+            <!-- <div class="row">
                <div class="col s6">
                  <div class="row">
                    <div class="input-field col s6">
@@ -45,7 +48,7 @@
                    </div>
                  </div>
                </div>
-            </div>
+            </div> -->
 
             <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
 
@@ -93,30 +96,5 @@
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="{% static 'js/materialize.min.js' %}"></script>
-        <!-- <script src="{% static 'js/jquery.star-rating-svg.js' %}"></script>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/star-rating-svg.css' %}">
-        <script type="text/javascript">
-        $(".my-rating").starRating({
-            starSize: 25,
-            callback: function(currentRating, $el){
-                // make a server call here
-                var vote = currentRating;
-                console.log(vote)
-            }
-        });
-        </script> -->
-        <script type="text/javascript">
-        $(document).ready(function(){
-          $('input.autocomplete').autocomplete({
-              data: {
-                {% for restaurant in restaurants %}
-                    "{{restaurant.name}}":null,
-                {% endfor %}
-              },
-              limit: Infinity,
-              minLength: 1
-          });
-        });
-        </script>
     </body>
 </html>
