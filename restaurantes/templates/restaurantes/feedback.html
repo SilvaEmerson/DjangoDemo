@@ -9,26 +9,34 @@
 
 <body>
     <main>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row center">
+                <div class="input-field col s6 m6 offset-m3">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="feed" class="materialize-textarea" name="feed"></textarea>
+                    <label for="feed">Deixe seu comentário: </label>
+                </div>
+            </div>
+            <div class="row center">
+                <button class="btn waves-effect waves-light gray" type="submit">
+                    Adicionar
+                    <i class="material-icons right">check</i>
+                </button>
+            </row>
+            <br><br>
+        </form>
     {% for feedback in rest_feedbacks %}
-        <h6>{{feedback}}</h6>
-    {% endfor %}
-    <form method="post">
-      {% csrf_token %}
-      <div class="row center">
-        <div class="input-field col s6 m6 offset-m3">
-          <i class="material-icons prefix">mode_edit</i>
-          <textarea id="feed" class="materialize-textarea" name="feed"></textarea>
-          <label for="feed">Deixe seu comentário: </label>
+    <div class="row">
+        <div class="col s6 m6 offset-m3">
+          <div class="card center">
+            <div class="card-content">
+              <p><h6 align="center">{{feedback}}</h6></p>
+            </div>
+          </div>
         </div>
-      </div>
-    <div class="row center">
-      <button class="btn waves-effect waves-light gray" type="submit">
-          Adicionar
-        <i class="material-icons right">check</i>
-      </button>
-  </row>
-
-    </form>
+    </div>
+    {% endfor %}
     </main>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="{% static 'js/materialize.min.js' %}"></script>

@@ -54,47 +54,13 @@ def do_feedback(request, pk):
         feedback = RestaurantFeed(request.POST)
         if feedback.is_valid():
             feed = feedback.cleaned_data['feed']
-            newComment = Comments(comment=feed)
+            newComment = Comments(restaurant_name=restaurant, comment=feed)
             newComment.save()
             restaurant.comments = newComment
             restaurant.save()
             return redirect('rests_list')
     else:
         print('get')
-        rest_feedbacks = Comments.objects.filter(id=pk)
+        rest_feedbacks = Comments.objects.filter(restaurant_name=restaurant)
     return render(request, 'restaurantes/feedback.html',
                   {'rest_feedbacks': rest_feedbacks})
-
-
-def vote0(request, pk):
-    restaurant = Restaurant.objects.get(pk=pk)
-    restaurant.votes += 1
-    return redirect('rests_list')
-
-
-def vote1(request, pk):
-    restaurant = Restaurant.objects.get(pk=pk)
-    restaurant.votes += 1
-    restaurant.total_points += 1
-    return redirect('rests_list')
-
-
-def vote2(request, pk):
-    restaurant = Restaurant.objects.get(pk=pk)
-    restaurant.votes += 1
-    restaurant.total_points += 2
-    return redirect('rests_list')
-
-
-def vote3(request, pk):
-    restaurant = Restaurant.objects.get(pk=pk)
-    restaurant.votes += 1
-    restaurant.total_points += 3
-    return redirect('rests_list')
-
-
-def vote4(request, pk):
-    restaurant = Restaurant.objects.get(pk=pk)
-    restaurant.votes += 1
-    restaurant.total_points += 4
-    return redirect('rests_list')
